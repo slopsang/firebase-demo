@@ -27,7 +27,7 @@
 	</head>
 
 	<!-- Initiate app and controller on body -->
-	<body >
+	<body ng-app="myApp" ng-controller="myCtrl">
 
 		<!-- Header with logout button -->
 		<header>
@@ -42,15 +42,15 @@
 		<div class="container">
 			
 			<!-- Sign-in/sign-up form: show if userId isn't defined -->
-			<form name="myForm" novalidate>
+			<form ng-show="!userId" name="myForm" novalidate>
 			
 				<!-- Bind model "handle" to this input, set minimum length, and make it required -->
 				<div class="form-group">
 					<label>Handle:</label>
-					<input name="handle" class="form-control">	
+					<input ng-model="handle" ng-minlength="6" name="handle" class="form-control">	
 					
 					<!-- Add an error message if the length is too short -->	
-					
+					<p class="help-block" ng-show="myForm.handle.$error.minlength">Too short!</p>
 				</div>	
 
 				<!-- Input for image URL -->
@@ -63,9 +63,10 @@
 				<!-- Bind model "email" to this input and make it required -->
 				<div class="form-group">
 					<label>Email:</label>
-					<input  name="email" type="email" class="form-control"></input>
+					<input ng-model="email" name="email" type="email" class="form-control"></input>
 
 					<!-- Show an error message if the email is not valid -->	
+					<p class="help-block" ng-show="myForm.email.$invalid">Not an email!</p>
 				</div>
 
 				<!-- Password -->
